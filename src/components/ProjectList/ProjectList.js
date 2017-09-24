@@ -33,12 +33,6 @@ class ProjectList extends React.Component{
                 member: ['A', 'B', 'C']
             },
             {
-                id:4,
-                name: "Example",
-                detail: "Lorem ipsum",
-                member: ['A', 'B', 'C']
-            },
-            {
                 id:5,
                 name: "Example",
                 detail: "Lorem ipsum",
@@ -72,13 +66,13 @@ class ProjectList extends React.Component{
 
         if (this.state.projects) {
             return(
-                <div>
+                <div className="container">
                     {this.renderProjects()}
                 </div>
             );
         } else {
             return(
-                <div>
+                <div className="container">
                     <div id='msg-app-loading'>
                         Loading
                     </div>

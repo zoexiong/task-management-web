@@ -1,4 +1,24 @@
 .list-group {
-    margin:0 10%;
     padding:10px;
+    margin: 0 3%;
+    text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .list-group {
+        margin: 0 2%;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .list-group {
+        margin: 0 1%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .list-group {
+        margin: 0;
+        padding: 10px 5px 10px 5px;
+    }
 }

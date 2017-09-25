@@ -1,6 +1,7 @@
 /*title and header*/
 .App {
   background-color: rgb(250,250,250);
+  width:100%;
 }
 
 .title {
@@ -24,6 +25,7 @@
   height: 150px;
   padding: 20px;
   color: white;
+  display: block;
 }
 
 .App-intro {

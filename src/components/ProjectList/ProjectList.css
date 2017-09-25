@@ -1,24 +1,38 @@
 .list-group {
-    padding:10px;
-    margin: 0 3%;
+    padding:10px 10%;
+    text-align: left;
+    display:inline-block;
+    width:80%;
+}
+
+.list-container {
     text-align: center;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1960px) {
     .list-group {
-        margin: 0 2%;
+        padding:10px 8%;
+        width:84%;
     }
 }
 
+/*@media screen and (max-width: 1440px) {*/
+    /*.list-group {*/
+        /*padding:10px 8%;*/
+        /*width:84%;*/
+    /*}*/
+/*}*/
+
 @media screen and (max-width: 1080px) {
     .list-group {
-        margin: 0 1%;
+        padding:10px 4%;
+        width:92%;
     }
 }
 
 @media screen and (max-width: 800px) {
     .list-group {
-        margin: 0;
-        padding: 10px 5px 10px 5px;
+        padding:10px 1%;
+        width:98%;
     }
 }

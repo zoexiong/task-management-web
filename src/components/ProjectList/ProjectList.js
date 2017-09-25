@@ -66,13 +66,13 @@ class ProjectList extends React.Component{
 
         if (this.state.projects) {
             return(
-                <div className="container">
+                <div className="list-container">
                     {this.renderProjects()}
                 </div>
             );
         } else {
             return(
-                <div className="container">
+                <div className="list-container">
                     <div id='msg-app-loading'>
                         Loading
                     </div>

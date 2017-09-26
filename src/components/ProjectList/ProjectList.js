@@ -1,7 +1,10 @@
 import './ProjectList.css';
 import React, {PropTypes} from 'react';
 import AddProjectForm from '../AddProjectForm/AddProjectForm';
-import ProjectCard from '../ProjectCard/ProjectCard'
+import ProjectCard from '../ProjectCard/ProjectCard';
+import _ from 'lodash';
+import PROJECTS from '../../data/tasks';
+import ProjectDetail from '../ProjectDetail/ProjectDetail'
 
 class ProjectList extends React.Component{
 
@@ -9,13 +12,9 @@ class ProjectList extends React.Component{
         super(props, context);
         this.state = {
             projects: null,
-            newProject: {
-                id: 6,
-                title: '',
-                description: '',
-                members: ['A']
-            },
-            addNew: false
+            addNew: false,
+            showDetail: false,
+            detailIndex: null
         };
 
         this.processForm = this.processForm.bind(this);
@@ -25,32 +24,7 @@ class ProjectList extends React.Component{
 
     componentDidMount() {
 
-        var projects = [
-            {
-                id:1,
-                title: "Example",
-                description: "Lorem ipsum",
-                members: ['A', 'B', 'C']
-            },
-            {
-                id:2,
-                title: "Example",
-                description: "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum",
-                members: ['A', 'B', 'C']
-            },
-            // {
-            //     id:3,
-            //     title: "Example",
-            //     description: "Lorem ipsum",
-            //     members: ['A', 'B', 'C']
-            // },
-            // {
-            //     id:5,
-            //     title: "Example",
-            //     description: "Lorem ipsum",
-            //     members: ['A', 'B', 'C']
-            // }
-        ];
+        const projects = PROJECTS;
 
         this.setState({
             projects : projects
@@ -60,26 +34,34 @@ class ProjectList extends React.Component{
     processForm(event) {
         // prevent default action. in this case, action is the form submission event
         event.preventDefault();
-        let newProject = this.state.newProject;
+
+        var newProject = _.clone(this.newProject);
 
         if (newProject.title && newProject.description && newProject.members) {
-            var projects = this.state.projects;
+
+            // state array should not be mutated directly
+            var projects = this.state.projects.slice();
+            newProject.id = projects.length + 1;
             projects.push(newProject);
 
             this.setState({
-                projects : projects
+                projects: projects,
+                addNew: !this.state.addNew
             });
+
         }
     }
 
+    newProject = {
+        id: null,
+        title: '',
+        description: '',
+        members: ['A']
+    };
+
     changeForm(event) {
         const field = event.target.name;
-        const newProject = this.state.newProject;
-        newProject[field] = event.target.value;
-
-        this.setState({
-            newProject
-        });
+        this.newProject[field] = event.target.value;
     }
 
     toggleAddForm() {
@@ -88,42 +70,62 @@ class ProjectList extends React.Component{
         });
     }
 
+    handleCardClick(i, event) {
+        console.log('i' + i);
+        this.setState({detailIndex:i});
+        this.setState({showDetail:true});
+    }
+
+    handleClickBack() {
+        this.setState({showDetail: false});
+    }
+
+    renderList() {
+
+        let projects_list = this.state.projects.map(function(project, i) {
+            return(
+                <ProjectCard project={project} key={i} onClick={this.handleCardClick.bind(this, i)} />
+            );
+        }, this);
+
+        let list =
+            <div className='list-group'>
+                {projects_list}
+                <ProjectCard addNew="true" onClick={this.toggleAddForm}/>
+            </div>;
+
+        return (
+            <div className="list-container">
+                {list}
+            </div>
+        )
+    }
+
     render() {
-
         if (this.state.projects) {
-
-            let projects_list = this.state.projects.map(function(project) {
-                return(
-                    <ProjectCard project={project} href="#" key={project.id} />
-                );
-            });
-
-            let list =
-                <div className='list-group'>
-                    {projects_list}
-                    <ProjectCard addNew="true" onClick={this.toggleAddForm}/>
-                </div>;
-
             if (this.state.addNew) {
                 return(
                     <div>
-                        <div className="list-container">
-                            {list}
-                        </div>
+                        {this.renderList()}
                         <AddProjectForm
                             onSubmit={this.processForm}
                             onChange={this.changeForm}
                         />
                     </div>
                 );
+            } else if (this.state.showDetail) {
+                var project = this.state.projects[this.state.detailIndex];
+                return (
+                    <div>
+                        <button onClick={(e) => this.handleClickBack(e)}>Back</button>
+                        <ProjectDetail project={project} />
+                    </div>
+                )
             } else {
                 return(
-                    <div className="list-container">
-                        {list}
-                    </div>
+                    this.renderList()
                 );
             }
-
         } else {
             return(
                 <div className="list-container">

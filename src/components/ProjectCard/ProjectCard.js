@@ -8,7 +8,7 @@ class ProjectCard extends React.Component{
 
         if (this.props.project){
             return(
-                <div className="card">
+                <div className="card" onClick={this.props.onClick}>
                     <div className="card-body">
                         <h4 className="card-name">{this.props.project.title}</h4>
                         <h6 className="card-detail">{this.props.project.description}</h6>

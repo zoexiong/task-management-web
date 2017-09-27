@@ -15,7 +15,7 @@
 }
 
 .card-detail {
-
+    height:4em;
 }
 
 .card-member {
@@ -56,6 +56,10 @@
         height:14em;
         padding: 0 2%;
     }
+
+    .card-detail {
+        height:7em;
+    }
 }
 
 @media screen and (max-width: 720px) {
@@ -68,6 +72,10 @@
 @media screen and (max-width: 480px) {
     .card {
         width: 92%;
-        height:11em;
+        height:10em;
+    }
+
+    .card-detail {
+        height:2em;
     }
 }

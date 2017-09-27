@@ -12,7 +12,7 @@ class ProjectCard extends React.Component{
                     <div className="card-body">
                         <h4 className="card-name">{this.props.project.title}</h4>
                         <h6 className="card-detail">{this.props.project.description}</h6>
-                        <p className="card-member">{this.props.project.members}</p>
+                        <p className="card-member">Total members: {this.props.project.members.length}</p>
                     </div>
                 </div>
             )

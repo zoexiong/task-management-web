@@ -4,6 +4,7 @@ import AddProjectForm from '../AddProjectForm/AddProjectForm';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import _ from 'lodash';
 import PROJECTS from '../../data/tasks';
+import MEMBERS from '../../data/tasks';
 import ProjectDetail from '../ProjectDetail/ProjectDetail'
 
 class ProjectList extends React.Component{
@@ -71,7 +72,6 @@ class ProjectList extends React.Component{
     }
 
     handleCardClick(i, event) {
-        console.log('i' + i);
         this.setState({detailIndex:i});
         this.setState({showDetail:true});
     }

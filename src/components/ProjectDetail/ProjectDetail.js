@@ -2,21 +2,31 @@
 
 import React from 'react';
 
+import ProjectDetailCard from '../ProjectDetailCard/ProjectDetailCard';
+
 class ProjectDetail extends React.Component{
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
 
-        if (this.props.project){
+        //if (this.props.project){
+
+            let members_list = this.props.project.members.map(function(member, i) {
+                return(
+                    //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
+                    <ProjectDetailCard member={member} key={i} />
+                );
+            });
+
             return(
-                <div className="card">
-                    <div className="card-body">
-                        <h4 className="card-name">{this.props.project.title}</h4>
-                        <h6 className="card-detail">{this.props.project.description}</h6>
-                        <p className="card-member">{this.props.project.members}</p>
-                    </div>
+                <div>
+                    {members_list}
                 </div>
             )
-        }
+        //}
 
     }
 }

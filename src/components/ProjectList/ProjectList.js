@@ -14,11 +14,13 @@ class ProjectList extends React.Component{
             projects: null,
             addNew: false,
             showDetail: false,
-            detailIndex: null
+            detailIndex: null,
+            selectedMembers: null
         };
 
         this.processForm = this.processForm.bind(this);
         this.changeForm = this.changeForm.bind(this);
+        this.onSelect = this.onSelect.bind(this);
         this.toggleAddForm = this.toggleAddForm.bind(this);
     }
 
@@ -37,31 +39,40 @@ class ProjectList extends React.Component{
 
         var newProject = _.clone(this.newProject);
 
-        if (newProject.title && newProject.description && newProject.members) {
+        if (newProject.title && newProject.description) {
 
             // state array should not be mutated directly
             var projects = this.state.projects.slice();
             newProject.id = projects.length + 1;
+            newProject.members = this.state.selectedMembers.split(',').map(function(name) {
+                return(
+                    {name: name, tasks: []}
+                );
+            });
             projects.push(newProject);
 
             this.setState({
                 projects: projects,
-                addNew: !this.state.addNew
+                addNew: !this.state.addNew,
+                selectedMembers: []
             });
-
         }
     }
 
     newProject = {
-        id: null,
         title: '',
         description: '',
-        members: []
     };
 
     changeForm(event) {
         const field = event.target.name;
         this.newProject[field] = event.target.value;
+    }
+
+    onSelect(val) {
+        this.setState({
+            selectedMembers: val
+        })
     }
 
     toggleAddForm() {
@@ -79,59 +90,41 @@ class ProjectList extends React.Component{
         this.setState({showDetail: false});
     }
 
-    renderList() {
-
-        let projects_list = this.state.projects.map(function(project, i) {
-            return(
-                <ProjectCard project={project} key={i} onClick={this.handleCardClick.bind(this, i)} />
-            );
-        }, this);
-
-        let list =
-            <div className='list-group'>
-                {projects_list}
-                <ProjectCard addNew="true" onClick={this.toggleAddForm}/>
-            </div>;
-
-        return (
-            <div className="list-container">
-                {list}
-            </div>
-        )
-    }
-
     render() {
+        var projects_list = <ProjectCard addNew="true" onClick={this.toggleAddForm}/>;
         if (this.state.projects) {
-            if (this.state.addNew) {
-                return(
-                    <div>
-                        {this.renderList()}
-                        <AddProjectForm
-                            onSubmit={this.processForm}
-                            onChange={this.changeForm}
-                        />
-                    </div>
-                );
-            } else if (this.state.showDetail) {
-                var project = this.state.projects[this.state.detailIndex];
+            projects_list = this.state.projects.map(function (project, i) {
                 return (
-                    <div>
-                        <button onClick={(e) => this.handleClickBack(e)}>Back</button>
-                        <ProjectDetail project={project} />
-                    </div>
-                )
-            } else {
-                return(
-                    this.renderList()
+                    <ProjectCard project={project} key={i} onClick={this.handleCardClick.bind(this, i)}/>
                 );
-            }
+            }, this);
+        }
+
+        if (this.state.addNew) {
+            return(
+                <div className='list-group'>
+                    {projects_list}
+                    <ProjectCard addNew="true" onClick={this.toggleAddForm}/>
+                    <AddProjectForm
+                        onSubmit = {this.processForm}
+                        onChange = {this.changeForm}
+                        onSelect = {this.onSelect}
+                    />
+                </div>
+            );
+        } else if (this.state.showDetail) {
+            var project = this.state.projects[this.state.detailIndex];
+            return (
+                <div>
+                    <button onClick={(e) => this.handleClickBack(e)}>Back</button>
+                    <ProjectDetail project={project} />
+                </div>
+            )
         } else {
             return(
-                <div className="list-container">
-                    <div id='msg-app-loading'>
-                        Loading
-                    </div>
-                    <ProjectCard addNew="true" />
+                <div className='list-group'>
+                    {projects_list}
+                    <ProjectCard addNew="true" onClick={this.toggleAddForm}/>
                 </div>
             );
         }

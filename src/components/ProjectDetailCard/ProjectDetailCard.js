@@ -8,7 +8,7 @@ class ProjectDetailCard extends React.Component{
 
         if (this.props.member){
 
-            var tasks_list = <p></p>
+            var tasks_list = <p></p>;
 
             if (this.props.member.tasks){
                 tasks_list = this.props.member.tasks.map(function(task, i) {
@@ -36,7 +36,7 @@ class ProjectDetailCard extends React.Component{
         } else if (this.props.addNew) {
             return (
                 <div className="tasks">
-                    <div className="task">
+                    <div className="task" onClick={this.props.onClick}>
                         <p>Add New Member</p>
                     </div>
                 </div>

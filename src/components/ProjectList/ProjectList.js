@@ -3,8 +3,7 @@ import React, {PropTypes} from 'react';
 import AddProjectForm from '../AddProjectForm/AddProjectForm';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import _ from 'lodash';
-import PROJECTS from '../../data/tasks';
-import MEMBERS from '../../data/tasks';
+import CONSTS from '../../data/tasks';
 import ProjectDetail from '../ProjectDetail/ProjectDetail'
 
 class ProjectList extends React.Component{
@@ -23,9 +22,9 @@ class ProjectList extends React.Component{
         this.toggleAddForm = this.toggleAddForm.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
-        const projects = PROJECTS;
+        const projects = CONSTS.PROJECTS;
 
         this.setState({
             projects : projects
@@ -57,7 +56,7 @@ class ProjectList extends React.Component{
         id: null,
         title: '',
         description: '',
-        members: ['A']
+        members: []
     };
 
     changeForm(event) {

@@ -1,0 +1,22 @@
+.tasks{
+    width: 20%;
+    border: 1px dashed lightgray;
+    margin:10px;
+    padding:10px;
+    background-color: white;
+    display: inline-block;
+    vertical-align:top;
+    text-align: left;
+}
+
+.task {
+    height: 6em;
+    width: 92%;
+    border: 1px solid lightgray;
+    margin:2%;
+    padding:2%;
+    background-color: white;
+    display: block;
+    vertical-align:top;
+    text-align: left;
+}

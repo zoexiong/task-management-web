@@ -29,14 +29,7 @@ class ProjectDetail extends React.Component{
         let project = this.props.project;
         let options = CONSTS.OPTIONS;
         var members = project.members;
-        members = members.map(function(member){
-            return(
-                member.name
-            )
-        });
-
-        this.filterOptions(members, options);
-
+        this.filterOptions(members.map(function(member){return(member.name)}), options);
         this.setState({
             project: project
         })
@@ -46,11 +39,9 @@ class ProjectDetail extends React.Component{
     //members: array of String, contains name of team members
     filterOptions(members, options) {
         var options = options.slice();
-
         var filteredOptions = options.filter(function(option) {
             return members.indexOf(option.value) < 0;
                 });
-
         this.setState({
             options: filteredOptions
         });
@@ -78,13 +69,12 @@ class ProjectDetail extends React.Component{
                 project: project
             });
 
-            console.log(this.state.selectedMembers);
+            this.props.onChange(project);
 
-            //filter out peope added to the project from the "add new member" options
+            //filter out people added to the project from the "add new member" options
             this.filterOptions(this.state.selectedMembers.split(','), this.state.options);
-
-            console.dir(this.state.options);
         }
+
 
         this.setState({
             selectedMembers: [],

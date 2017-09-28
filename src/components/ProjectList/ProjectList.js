@@ -22,6 +22,7 @@ class ProjectList extends React.Component{
         this.changeForm = this.changeForm.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.toggleAddForm = this.toggleAddForm.bind(this);
+        this.projectOnChange = this.projectOnChange.bind(this);
     }
 
     componentWillMount() {
@@ -90,6 +91,15 @@ class ProjectList extends React.Component{
         this.setState({showDetail: false});
     }
 
+    projectOnChange(project) {
+        let projects = _.clone(this.state.projects);
+        projects[this.state.detailIndex] = project;
+
+        this.setState({
+           projects: projects
+        });
+    }
+
     render() {
         var projects_list = <ProjectCard addNew="true" onClick={this.toggleAddForm}/>;
         if (this.state.projects) {
@@ -117,7 +127,7 @@ class ProjectList extends React.Component{
             return (
                 <div>
                     <button onClick={(e) => this.handleClickBack(e)}>Back</button>
-                    <ProjectDetail project={project} />
+                    <ProjectDetail project={project} onChange={this.projectOnChange} />
                 </div>
             )
         } else {
@@ -128,10 +138,6 @@ class ProjectList extends React.Component{
                 </div>
             );
         }
-
-
-
-
     }
 }
 

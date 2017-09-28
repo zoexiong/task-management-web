@@ -7,9 +7,7 @@ class ProjectDetailCard extends React.Component{
     render() {
 
         if (this.props.member){
-
             var tasks_list = <p></p>;
-
             if (this.props.member.tasks){
                 tasks_list = this.props.member.tasks.map(function(task, i) {
                     return(
@@ -21,8 +19,6 @@ class ProjectDetailCard extends React.Component{
                     );
                 });
             }
-
-
             return(
                 <div className="tasks">
                     <h4 className="card-name">{this.props.member.name}</h4>

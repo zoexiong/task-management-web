@@ -1,19 +1,18 @@
 import React, {PropTypes} from 'react';
-import './AddProjectForm.css';
+import './AddTaskForm.css';
 
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import CONSTS from '../../data/tasks';
 
-//UI part for add project page
+//UI part for add task page
 
-class AddProjectForm extends React.Component {
+class AddTaskForm extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            selectedMembers: [],
-            options: []
+            status: 'Schedule'
         };
     }
 
@@ -26,7 +25,7 @@ class AddProjectForm extends React.Component {
             <div className="container">
                 <div className="card-panel login-panel">
                     <form className="col s12" action="/" onSubmit={this.props.onSubmit}>
-                        <h4 className="center-align">Create Project</h4>
+                        <h4 className="center-align">Create Task</h4>
 
                         <div className="row">
                             <div className="input-field col s12">
@@ -44,11 +43,10 @@ class AddProjectForm extends React.Component {
 
                         <Select
                             name="select-members"
-                            value= {this.state.selectedMembers}
-                            options={CONSTS.OPTIONS}
-                            onChange={(val) => {this.props.onSelect(val); this.setState({selectedMembers: val})}}
+                            value= {this.state.status}
+                            options={CONSTS.STATUS_OPTIONS}
+                            onChange={(val) => {this.props.onSelect(val); this.setState({status: val})}}
                             simpleValue={true}
-                            multi={true}
                         />
 
 
@@ -63,10 +61,10 @@ class AddProjectForm extends React.Component {
     }
 }
 
-AddProjectForm.propTypes = {
+AddTaskForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired
 };
 
-export default AddProjectForm;
+export default AddTaskForm;

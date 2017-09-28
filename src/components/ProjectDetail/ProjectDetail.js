@@ -16,13 +16,14 @@ class ProjectDetail extends React.Component{
             project: null,
             addMember: false,
             selectedMembers: [],
-            options: []
+            options: [],
         };
 
-        //this.processForm = this.processForm.bind(this);
+        //this.handleClick = this.handleClick.bind(this);
         this.filterOptions = this.filterOptions.bind(this);
         this.submitAddMember = this.submitAddMember.bind(this);
         this.toggleAddMember = this.toggleAddMember.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentWillMount() {
@@ -60,7 +61,7 @@ class ProjectDetail extends React.Component{
                 {name: name, tasks: []}
                 );
             });
-            members = members.concat(this.state.project.members);
+            members = this.state.project.members.concat(members);
 
             let project = _.clone(this.state.project);
             project.members = members;
@@ -69,6 +70,7 @@ class ProjectDetail extends React.Component{
                 project: project
             });
 
+            //update the info and pass it to main view
             this.props.onChange(project);
 
             //filter out people added to the project from the "add new member" options
@@ -82,6 +84,21 @@ class ProjectDetail extends React.Component{
         });
     }
 
+    onChange(member) {
+        let project = _.clone(this.state.project);
+        let index = member.index;
+        delete member.index;
+        project.members[index] = member;
+
+        this.setState({
+            project: project
+        });
+
+        //update the info and pass it to main view
+        this.props.onChange(project);
+    }
+
+
     render() {
         var members_list = <p></p>;
         var selectAddMember = <p></p>;
@@ -90,9 +107,9 @@ class ProjectDetail extends React.Component{
             members_list = this.state.project.members.map(function(member, i) {
                 return(
                     //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                    <ProjectDetailCard member={member} key={i} />
+                    <ProjectDetailCard member={member} key={i} onChange={this.onChange} index={i} />
                 );
-            });
+            }, this);
         }
 
         if (this.state.addMember) {
@@ -102,7 +119,7 @@ class ProjectDetail extends React.Component{
                         name="select-members"
                         value= {this.state.selectedMembers}
                         options={this.state.options}
-                        onChange={(val) => {this.setState({selectedMembers: val}); console.log(this.state.selectedMembers)}}
+                        onChange={(val) => {this.setState({selectedMembers: val})}}
                         simpleValue={true}
                         multi={true}
                     />
@@ -117,8 +134,6 @@ class ProjectDetail extends React.Component{
                 {selectAddMember}
             </div>
         )
-
-
     }
 }
 

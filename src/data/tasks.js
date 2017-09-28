@@ -138,9 +138,16 @@ const OPTIONS = MEMBERS.map(function(name) {
     );
 });
 
+const STATUS_OPTIONS = STATUS.map(function(status) {
+    return(
+    {value: status, label: status}
+    );
+});
+
 module.exports = {
     PROJECTS: PROJECTS,
     MEMBERS: MEMBERS,
     STATUS: STATUS,
-    OPTIONS: OPTIONS
+    OPTIONS: OPTIONS,
+    STATUS_OPTIONS: STATUS_OPTIONS
 };

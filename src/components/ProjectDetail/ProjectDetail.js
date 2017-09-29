@@ -1,4 +1,4 @@
-//import './ProjectDetail.css';
+import './ProjectDetail.css';
 
 import React from 'react';
 import _ from 'lodash';

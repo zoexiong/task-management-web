@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './App.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -11,17 +11,21 @@ registerServiceWorker();
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 // import SharedGroup from './App';
-
+//
 // const App = (props) => {
 //     return (
 //         <div>
+//             <div className="block-list">
 //             <SharedGroup
 //                 items={['Apple', 'Banaba', 'Cherry', 'Grape']}
 //             />
-//             <br/>
+//                 </div>
+//
+//             <div className="block-list">
 //             <SharedGroup
 //                 items={['Lemon', 'Orange', 'Pear', 'Peach']}
 //             />
+//                 </div>
 //         </div>
 //     );
 // };

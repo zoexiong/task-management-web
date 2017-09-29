@@ -4,6 +4,9 @@ import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import React from 'react';
 import _ from 'lodash';
 
+import uniqueId from 'lodash/uniqueId';
+import Sortable from 'react-sortablejs';
+
 class ProjectDetailCard extends React.Component{
 
     constructor(props) {
@@ -80,10 +83,11 @@ class ProjectDetailCard extends React.Component{
             var add_task = <p></p>;
 
             if (this.state.member.tasks){
+
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
                         //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                        <div className="task" key={i} >
+                        <div className="task" key={i} data-id={task.name} >
                             <p>{task.title} <span><button>{task.status}</button></span></p>
                             <p>{task.description}</p>
                         </div>
@@ -101,7 +105,18 @@ class ProjectDetailCard extends React.Component{
             return(
                 <div className="tasks">
                     <h4 className="card-name">{this.state.member.name}</h4>
-                    {tasks_list}
+
+                    <Sortable
+                        // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                        options={{
+                            group: 'shared'
+                        }}
+                        tag="div"
+                    >
+                        {tasks_list}
+                    </Sortable>
+
+
                     <div className="task" onClick={this.toggleAddTask}>
                         <p>+</p>
                         <p>Create New Task</p>

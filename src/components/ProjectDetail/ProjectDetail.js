@@ -8,6 +8,10 @@ import CONSTS from '../../data/tasks';
 
 import ProjectDetailCard from '../ProjectDetailCard/ProjectDetailCard';
 
+
+import ReactDOM from 'react-dom';
+
+
 class ProjectDetail extends React.Component{
 
     constructor(props, context) {
@@ -106,8 +110,14 @@ class ProjectDetail extends React.Component{
         if (this.state.project.members){
             members_list = this.state.project.members.map(function(member, i) {
                 return(
-                    //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                    <ProjectDetailCard member={member} key={i} onChange={this.onChange} index={i} />
+                    //<ProjectDetailCard member={member} key={i} onChange={this.onChange} index={i} />
+                    <ProjectDetailCard
+                        member={member}
+                        items={member.tasks}
+                        key={i}
+                        onChange={this.onChange}
+                        index={i}
+                    />
                 );
             }, this);
         }

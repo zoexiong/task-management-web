@@ -15,7 +15,8 @@
 }
 
 .card-detail {
-    height:4em;
+    height:6em;
+    margin-top: 20px;
 }
 
 .card-member {
@@ -53,7 +54,7 @@
     .card {
         width: 27%;
         margin:15px 1%;
-        height:14em;
+        height:12em;
         padding: 0 2%;
     }
 
@@ -76,6 +77,6 @@
     }
 
     .card-detail {
-        height:2em;
+        height:4em;
     }
 }

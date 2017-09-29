@@ -123,13 +123,15 @@ class ProjectList extends React.Component{
                 </div>
             );
         } else if (this.state.showDetail) {
-            var project = this.state.projects[this.state.detailIndex];
-            return (
-                <div>
-                    <button onClick={(e) => this.handleClickBack(e)}>Back</button>
-                    <ProjectDetail project={project} onChange={this.projectOnChange} />
-                </div>
-            )
+            if (this.state.projects) {
+                var project = this.state.projects[this.state.detailIndex];
+                return (
+                    <div>
+                        <button onClick={(e) => this.handleClickBack(e)}>Back</button>
+                        <ProjectDetail project={project} onChange={this.projectOnChange} />
+                    </div>
+                )
+            }
         } else {
             return(
                 <div className='list-group'>

@@ -54,7 +54,7 @@ class ProjectDetailCard extends React.Component{
             });
 
             member.index = this.props.index;
-            this.props.onChange(member);
+            this.props.onChangeMember(member);
         }
     }
 
@@ -87,7 +87,7 @@ class ProjectDetailCard extends React.Component{
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
                         //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                        <div className="task" key={i} data-id={task.name} >
+                        <div className="task" key={uniqueId()} >
                             <p>{task.title} <span><button>{task.status}</button></span></p>
                             <p>{task.description}</p>
                         </div>
@@ -107,12 +107,17 @@ class ProjectDetailCard extends React.Component{
                     <h4 className="card-name">{this.state.member.name}</h4>
 
                     <Sortable
+                        id={this.props.index}
                         // See all Sortable options at https://github.com/RubaXa/Sortable#options
                         options={{
-                            group: 'shared'
+                            group: 'shared',
+                            sort: false,
                         }}
-                        tag="div"
-                    >
+                        tag="div" //default is div
+                        onChange={(order, sortable, evt) => {
+                            this.props.onChange(evt);
+                        }}
+                        >
                         {tasks_list}
                     </Sortable>
 
@@ -136,5 +141,10 @@ class ProjectDetailCard extends React.Component{
 
     }
 }
+
+ProjectDetailCard.propTypes = {
+    items: React.PropTypes.array,
+    onChange: React.PropTypes.func
+};
 
 export default ProjectDetailCard;

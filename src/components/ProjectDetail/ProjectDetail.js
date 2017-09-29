@@ -1,4 +1,4 @@
-//import './ProjectDetail.css';
+import './ProjectDetail.css';
 
 import React from 'react';
 import _ from 'lodash';
@@ -27,7 +27,8 @@ class ProjectDetail extends React.Component{
         this.filterOptions = this.filterOptions.bind(this);
         this.submitAddMember = this.submitAddMember.bind(this);
         this.toggleAddMember = this.toggleAddMember.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.onChangeMember = this.onChangeMember.bind(this);
+        this.onDnd = this.onDnd.bind(this);
     }
 
     componentWillMount() {
@@ -88,7 +89,7 @@ class ProjectDetail extends React.Component{
         });
     }
 
-    onChange(member) {
+    onChangeMember(member) {
         let project = _.clone(this.state.project);
         let index = member.index;
         delete member.index;
@@ -102,6 +103,33 @@ class ProjectDetail extends React.Component{
         this.props.onChange(project);
     }
 
+    i = 0;
+
+    onDnd(event) {
+
+        this.i = this.i + 1;
+
+        if (this.i == 2) {
+            let from = parseInt(event.from.id);
+            let oldIndex = event.oldIndex;
+            let to = parseInt(event.to.id);
+            let newIndex = event.newIndex;
+            let project = _.clone(this.state.project);
+            var insertTask = _.clone(project.members[from].tasks[oldIndex]);
+            var tasks = project.members[to].tasks.slice();
+            tasks.splice(newIndex, 0, insertTask);
+            project.members[to].tasks = tasks;
+            project.members[from].tasks.splice(oldIndex, 1);
+
+            this.i = 0;
+
+            // update the info and pass it to main view
+            this.props.onChange(project);
+
+            //console.log(from, oldIndex, to, newIndex);
+        }
+    }
+
 
     render() {
         var members_list = <p></p>;
@@ -113,9 +141,13 @@ class ProjectDetail extends React.Component{
                     //<ProjectDetailCard member={member} key={i} onChange={this.onChange} index={i} />
                     <ProjectDetailCard
                         member={member}
-                        items={member.tasks}
+                        items={this.state.project.members[i].tasks}
                         key={i}
-                        onChange={this.onChange}
+                        onChangeMember={this.onChangeMember}
+                        onChange={(evt) => {
+                            console.log(evt);
+                            this.onDnd(evt);
+                        }}
                         index={i}
                     />
                 );

@@ -1,5 +1,6 @@
 import './ProjectDetailCard.css';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
+import CONSTS from '../../data/tasks';
 
 import React from 'react';
 import _ from 'lodash';
@@ -21,6 +22,8 @@ class ProjectDetailCard extends React.Component{
         this.changeForm = this.changeForm.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.toggleAddTask = this.toggleAddTask.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
+        this.getStatusOptions = this.getStatusOptions.bind(this);
     }
 
     componentWillMount() {
@@ -76,6 +79,25 @@ class ProjectDetailCard extends React.Component{
         });
     }
 
+    changeStatus(status, taskIndex){
+        var member = _.clone(this.state.member);
+        member.tasks[taskIndex].status = status;
+
+        this.setState({
+            member: member
+        });
+
+        this.props.onChangeMember(member);
+    }
+
+    getStatusOptions(taskIndex) {
+        return CONSTS.STATUS.map(function(status, i){
+            return(
+                <li key={i}><a href="#" onClick={(e) => {this.changeStatus(status, taskIndex)}}>{status}</a></li>
+            )
+        }, this);
+    };
+
     render() {
 
         if (this.state.member){
@@ -83,16 +105,26 @@ class ProjectDetailCard extends React.Component{
             var add_task = <p></p>;
 
             if (this.state.member.tasks){
-
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
                         //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
                         <div className="task" key={uniqueId()} >
-                            <p>{task.title} <span><button>{task.status}</button></span></p>
+                            <div>{task.title}
+                                <span>
+                                    <div className="btn-group">
+                                      <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                          {task.status} <span className="caret"></span>
+                                      </button>
+                                      <ul className="dropdown-menu">
+                                          {this.getStatusOptions(i)}
+                                      </ul>
+                                    </div>
+                                </span>
+                            </div>
                             <p>{task.description}</p>
                         </div>
                     );
-                });
+                }, this);
             }
 
             if (this.state.addTask) {

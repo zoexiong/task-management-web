@@ -100,7 +100,7 @@ class ProjectDetailCard extends React.Component{
             }
             return(
                 <div className="tasks">
-                    <h4 className="card-name">{this.props.member.name}</h4>
+                    <h4 className="card-name">{this.state.member.name}</h4>
                     {tasks_list}
                     <div className="task" onClick={this.toggleAddTask}>
                         <p>+</p>

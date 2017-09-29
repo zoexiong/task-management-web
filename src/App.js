@@ -23,27 +23,3 @@ class App extends Component {
 }
 
 export default App;
-
-// import uniqueId from 'lodash/uniqueId';
-// import React from 'react';
-// import Sortable from 'react-sortablejs';
-// import './App.css';
-//
-// //Functional Component
-// const SharedGroup = ({ items }) => {
-//     items = items.map(val => (<li key={uniqueId()} data-id={val}>{val}</li>));
-//
-//     return (
-//         <Sortable
-//             // See all Sortable options at https://github.com/RubaXa/Sortable#options
-//             options={{
-//                 group: 'shared'
-//             }}
-//             tag="div"
-//         >
-//             {items}
-//         </Sortable>
-//     );
-// };
-//
-// export default SharedGroup;

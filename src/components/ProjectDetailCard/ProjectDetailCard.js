@@ -176,10 +176,11 @@ class ProjectDetailCard extends React.Component{
                         {tasks_list}
                     </Sortable>
 
-
                     <div className="task" onClick={this.toggleAddTask}>
-                        <p>+</p>
-                        <p>Create New Task</p>
+                        <div className="card-new">
+                            <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                            <h4>Create New Task</h4>
+                        </div>
                     </div>
                     {add_task}
                 </div>

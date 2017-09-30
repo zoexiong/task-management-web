@@ -15,6 +15,12 @@
     border: none;
 }
 
+.project-title {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 20px;
+}
+
 @media screen and (max-width: 1960px) {
     .list-group {
         padding:10px 10%;

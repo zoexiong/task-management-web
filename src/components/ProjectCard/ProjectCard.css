@@ -13,6 +13,7 @@
     vertical-align:top;
     text-align: left;
     font-family: Lato;
+    word-break: break-all;
 }
 
 .card-new {

@@ -23,42 +23,55 @@ class AddProjectForm extends React.Component {
 
     render() {
         return(
-            <div className="container">
-                <div className="card-panel login-panel">
-                    <form className="col s12" action="/" onSubmit={this.props.onSubmit}>
-                        <h4 className="center-align">Create Project</h4>
 
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <input className="validate" id="title" type="text" name="title" onChange={this.props.onChange}/>
-                                <label htmlFor='title'>Title</label>
+            <div className="modal">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" onClick={this.props.onClose}>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 className="modal-title">Create Project</h4>
+                        </div>
+                        <div className="modal-body">
+
+                            <div className="card-panel login-panel">
+                                <form className="col s12" action="/" onSubmit={this.props.onSubmit}>
+                                    <div className="row">
+                                        <div className="input-field">
+                                            <label htmlFor='title'>Title (max 35 characters)</label>
+                                            <br/>
+                                            <input className="form-control validate" id="title" type="text" name="title" onChange={this.props.onChange}/>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="input-field col s12">
+                                            <label htmlFor='description'>Description (max 120 characters)</label>
+                                            <br/>
+                                            <textarea className="form-control validate" rows="2" id="description" type="text-area" name="description" onChange={this.props.onChange}/>
+                                        </div>
+                                    </div>
+                                    <Select
+                                        name="select-members"
+                                        value= {this.state.selectedMembers}
+                                        options={CONSTS.OPTIONS}
+                                        onChange={(val) => {this.props.onSelect(val); this.setState({selectedMembers: val})}}
+                                        simpleValue={true}
+                                        multi={true}
+                                    />
+                                    <input type="submit" className="btn-primary btn" value='Add'/>
+                                </form>
                             </div>
+
                         </div>
-
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <input className="validate" id="description" type="text-area" name="description" onChange={this.props.onChange}/>
-                                <label htmlFor='description'>Description</label>
-                            </div>
-                        </div>
-
-                        <Select
-                            name="select-members"
-                            value= {this.state.selectedMembers}
-                            options={CONSTS.OPTIONS}
-                            onChange={(val) => {this.props.onSelect(val); this.setState({selectedMembers: val})}}
-                            simpleValue={true}
-                            multi={true}
-                        />
-
-
-                        <div className="row right-align">
-                            <input type="submit" className="waves-effect waves-light btn indigo lighten-1" value='Add'/>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
+
+
+
+
+
         )
     }
 }

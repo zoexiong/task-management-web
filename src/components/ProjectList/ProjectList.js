@@ -23,6 +23,7 @@ class ProjectList extends React.Component{
         this.onSelect = this.onSelect.bind(this);
         this.toggleAddForm = this.toggleAddForm.bind(this);
         this.projectOnChange = this.projectOnChange.bind(this);
+        this.onCloseModal = this.onCloseModal.bind(this);
     }
 
     componentWillMount() {
@@ -41,7 +42,8 @@ class ProjectList extends React.Component{
         var newProject = _.clone(this.newProject);
 
         if (newProject.title && newProject.description) {
-
+            newProject.title = newProject.title.slice(0,35);
+            newProject.description = newProject.description.slice(0,120);
             // state array should not be mutated directly
             var projects = this.state.projects.slice();
             newProject.id = projects.length + 1;
@@ -82,6 +84,12 @@ class ProjectList extends React.Component{
         });
     }
 
+    onCloseModal() {
+        this.setState({
+           addNew: false
+        });
+    }
+
     handleCardClick(i, event) {
         this.setState({detailIndex:i});
         this.setState({showDetail:true});
@@ -119,6 +127,7 @@ class ProjectList extends React.Component{
                         onSubmit = {this.processForm}
                         onChange = {this.changeForm}
                         onSelect = {this.onSelect}
+                        onClose = {this.onCloseModal}
                     />
                 </div>
             );
@@ -128,6 +137,7 @@ class ProjectList extends React.Component{
                 return (
                     <div>
                         <button type="button" className="btn btn-primary btn-lg" onClick={(e) => this.handleClickBack(e)}>Back</button>
+                        <h3 className="project-title">Project: {project.title}</h3>
                         <ProjectDetail project={project} onChange={this.projectOnChange} />
                     </div>
                 )

@@ -25,6 +25,7 @@ class ProjectDetailCard extends React.Component{
         this.changeStatus = this.changeStatus.bind(this);
         this.getStatusOptions = this.getStatusOptions.bind(this);
         this.getStyle = this.getStyle.bind(this);
+        this.onClose = this.onClose.bind(this);
     }
 
     componentWillMount() {
@@ -115,7 +116,11 @@ class ProjectDetailCard extends React.Component{
         return color
     }
 
-
+    onClose() {
+        this.setState({
+            addTask: false
+        });
+    }
 
     render() {
 
@@ -148,6 +153,7 @@ class ProjectDetailCard extends React.Component{
                     onSubmit = {this.submitForm}
                     onChange = {this.changeForm}
                     onSelect = {this.onSelect}
+                    onClose = {this.onClose}
                 />
             }
             return(

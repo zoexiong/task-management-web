@@ -10,16 +10,17 @@ class ProjectCard extends React.Component{
             return(
                 <div className="card" onClick={this.props.onClick}>
                     <h4 className="card-name">{this.props.project.title}</h4>
-                    <h6 className="card-detail">{this.props.project.description}</h6>
+                    <p className="card-detail">{this.props.project.description}</p>
                     <p className="card-member">Total members: {this.props.project.members.length}</p>
                 </div>
             )
         } else if (this.props.addNew){
             return(
-                <div className="card" onClick={this.props.onClick}>
-                    <h4 className="card-name">+</h4>
-                    <h6 className="card-detail">Create New Project</h6>
-                    <p className="card-member"></p>
+                <div className="card" data-toggle="modal" onClick={this.props.onClick}>
+                    <div className="card-new">
+                        <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                        <h4>Create New Project</h4>
+                    </div>
                 </div>
             )
         }

@@ -1,0 +1,16 @@
+.modal {
+    display: block;
+    margin-top: 200px;
+}
+
+.modal-body{
+    padding: 10px 15px;
+}
+
+.input-field {
+    padding: 0 15px;
+}
+
+.Select {
+    margin: 20px 0;
+}

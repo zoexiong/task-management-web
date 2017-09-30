@@ -1,5 +1,6 @@
 import './ProjectDetailCard.css';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
+import CONSTS from '../../data/tasks';
 
 import React from 'react';
 import _ from 'lodash';
@@ -21,6 +22,10 @@ class ProjectDetailCard extends React.Component{
         this.changeForm = this.changeForm.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.toggleAddTask = this.toggleAddTask.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
+        this.getStatusOptions = this.getStatusOptions.bind(this);
+        this.getStyle = this.getStyle.bind(this);
+        this.onClose = this.onClose.bind(this);
     }
 
     componentWillMount() {
@@ -76,6 +81,47 @@ class ProjectDetailCard extends React.Component{
         });
     }
 
+    changeStatus(status, taskIndex){
+        var member = _.clone(this.state.member);
+        member.tasks[taskIndex].status = status;
+
+        this.setState({
+            member: member
+        });
+
+        this.props.onChangeMember(member);
+    }
+
+    getStatusOptions(taskIndex) {
+        return CONSTS.STATUS.map(function(status, i){
+            return(
+                <li key={i}><a href="#" onClick={(e) => {this.changeStatus(status, taskIndex)}}>{status}</a></li>
+            )
+        }, this);
+    };
+
+    getStyle(status) {
+        var color = '';
+        if (status === 'Done') {
+            color = 'mediumseagreen';
+        } else if (status === 'On Hold') {
+            color = 'yellow';
+        } else if (status === 'In Process') {
+            color = 'orange';
+        } else if (status === 'Schedule') {
+            color = 'lightblue';
+        } else if (status === 'Sent') {
+            color = 'lightgray';
+        }
+        return color
+    }
+
+    onClose() {
+        this.setState({
+            addTask: false
+        });
+    }
+
     render() {
 
         if (this.state.member){
@@ -83,16 +129,23 @@ class ProjectDetailCard extends React.Component{
             var add_task = <p></p>;
 
             if (this.state.member.tasks){
-
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
                         //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                        <div className="task" key={uniqueId()} >
-                            <p>{task.title} <span><button>{task.status}</button></span></p>
+                        <div className="task detail" key={uniqueId()} style={{borderLeft: '10px solid ' + this.getStyle(task.status)}}>
+                            {task.title}
+                            <div className="btn-group">
+                              <button type="button" id={'button-' + i} className='btn dropdown-toggle status' style={{backgroundColor: this.getStyle(task.status)}} data-toggle="dropdown">
+                                  <p>{task.status} <span className="caret"></span></p>
+                              </button>
+                              <ul className="dropdown-menu">
+                                  {this.getStatusOptions(i)}
+                              </ul>
+                            </div>
                             <p>{task.description}</p>
                         </div>
                     );
-                });
+                }, this);
             }
 
             if (this.state.addTask) {
@@ -100,12 +153,14 @@ class ProjectDetailCard extends React.Component{
                     onSubmit = {this.submitForm}
                     onChange = {this.changeForm}
                     onSelect = {this.onSelect}
+                    onClose = {this.onClose}
                 />
             }
             return(
                 <div className="tasks">
-                    <h4 className="card-name">{this.state.member.name}</h4>
-
+                    <div className="task name">
+                        <h4 className="card-name">{this.state.member.name}</h4>
+                    </div>
                     <Sortable
                         id={this.props.index}
                         // See all Sortable options at https://github.com/RubaXa/Sortable#options
@@ -132,8 +187,8 @@ class ProjectDetailCard extends React.Component{
         } else if (this.props.addNew) {
             return (
                 <div className="tasks">
-                    <div className="task" onClick={this.props.onClick}>
-                        <p>Add New Member</p>
+                    <div className="task name" onClick={this.props.onClick}>
+                        <h4 id="add-new">Add New Member</h4>
                     </div>
                 </div>
             )

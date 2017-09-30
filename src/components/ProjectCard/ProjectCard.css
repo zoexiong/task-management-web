@@ -1,26 +1,44 @@
+* {
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .card {
     height: 12em;
     /*width: 20%;*/
     border: 1px solid lightgray;
     /*margin:20px 1%;*/
-    padding:0 1%;
+    padding:0 12px;
     background-color: white;
     display: inline-block;
     vertical-align:top;
     text-align: left;
+    font-family: Lato;
+    word-break: break-all;
 }
 
-.card-name {
+.card-new {
+    padding-top:20%;
+    text-align: center;
+    color: lightslategray;
 
+}
+
+.card-new i {
+    font-size: 2em;
 }
 
 .card-detail {
-    height:6em;
-    margin-top: 20px;
+    height:5.5em;
+    margin: 20px 0 0;
+    color: gray;
+    font-family: "Helvetica", sans-serif;
+    font-weight: 300;
+    line-height: 150%;
+    font-size: 13px;
 }
 
 .card-member {
-
+    ;
 }
 
 @media screen and (min-width: 1960px) {
@@ -32,14 +50,14 @@
 
 @media screen and (max-width: 1959px) {
     .card {
-        width: 21.5%;
+        width: 22%;
         margin:20px 0.6%;
     }
 }
 
 @media screen and (max-width: 1440px) {
     .card {
-        width: 29.5%;
+        width: 30%;
         margin:20px 0.8%;
     }
 }
@@ -52,20 +70,19 @@
 
 @media screen and (max-width: 1080px) {
     .card {
-        width: 27%;
+        width: 29.5%;
         margin:15px 1%;
         height:12em;
-        padding: 0 2%;
     }
 
     .card-detail {
-        height:7em;
+        height:6em;
     }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 800px) {
     .card {
-        margin: 10px 1.5%;
+        margin: 10px 3%;
         width: 42%;
     }
 }

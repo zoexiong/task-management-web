@@ -1,25 +1,25 @@
 const PROJECTS = [
     {
         id:1,
-        title: "Example",
-        description: "Lorem ipsum",
+        title: "Paid",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
         members: [
             {
                 name: 'Lori Lane',
                 tasks:[
                     {
-                        title: 'Lorem ipsum',
-                        description: 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+                        title: 'Publishing View',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ',
                         status: 'Done'
                     },
                     {
-                        title: 'Lorem2 ipsum',
-                        description: 'Lorem2 ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+                        title: 'Icon Creation',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ',
                         status: 'In Process'
                     },
                     {
-                        title: 'Lorem3 ipsum',
-                        description: 'Lorem3 ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+                        title: 'Debug View',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
                         status: 'On Hold'
                     }]
             },
@@ -28,12 +28,12 @@ const PROJECTS = [
                 tasks: [
                     {
                         title: 'Lorem ipsum',
-                        description: 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
                         status: 'Done'
                     },
                     {
                         title: 'Lorem2 ipsum',
-                        description: 'Lorem2 ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
                         status: 'In Process'
                     }]
             },
@@ -42,15 +42,15 @@ const PROJECTS = [
                 tasks:[
                     {
                         title: 'Lorem2 ipsum',
-                        description: 'Lorem2 ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
                         status: 'In Process'
                     }]
             }]
     },
     {
         id:2,
-        title: "Example",
-        description: "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum",
+        title: "Core",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
         members: [
             {
                 name: 'Lori Lane',
@@ -83,8 +83,8 @@ const PROJECTS = [
     },
     {
         id:3,
-        title: "Empty",
-        description: "Lorem ipsum",
+        title: "Publishing",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
         members: []
     },
     // {

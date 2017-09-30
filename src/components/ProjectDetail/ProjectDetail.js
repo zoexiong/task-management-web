@@ -29,6 +29,7 @@ class ProjectDetail extends React.Component{
         this.toggleAddMember = this.toggleAddMember.bind(this);
         this.onChangeMember = this.onChangeMember.bind(this);
         this.onDnd = this.onDnd.bind(this);
+        this.onCloseModal = this.onCloseModal.bind(this);
     }
 
     componentWillMount() {
@@ -106,9 +107,7 @@ class ProjectDetail extends React.Component{
     i = 0;
 
     onDnd(event) {
-
         this.i = this.i + 1;
-
         if (this.i == 2) {
             let from = parseInt(event.from.id);
             let oldIndex = event.oldIndex;
@@ -125,11 +124,14 @@ class ProjectDetail extends React.Component{
 
             // update the info and pass it to main view
             this.props.onChange(project);
-
-            //console.log(from, oldIndex, to, newIndex);
         }
     }
 
+    onCloseModal() {
+        this.setState({
+            addMember: false
+        });
+    }
 
     render() {
         var members_list = <p></p>;
@@ -156,16 +158,28 @@ class ProjectDetail extends React.Component{
 
         if (this.state.addMember) {
             selectAddMember =
-                <div>
-                    <Select
-                        name="select-members"
-                        value= {this.state.selectedMembers}
-                        options={this.state.options}
-                        onChange={(val) => {this.setState({selectedMembers: val})}}
-                        simpleValue={true}
-                        multi={true}
-                    />
-                    <button onClick={this.submitAddMember}>Submit</button>
+                <div className="modal">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" onClick={this.onCloseModal}>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 className="modal-title">Select New Member</h4>
+                            </div>
+                            <div className="modal-body">
+                                <Select
+                                    name="select-members"
+                                    value= {this.state.selectedMembers}
+                                    options={this.state.options}
+                                    onChange={(val) => {this.setState({selectedMembers: val})}}
+                                    simpleValue={true}
+                                    multi={true}
+                                />
+                                <button className="btn-primary btn" onClick={this.submitAddMember}>Submit</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
         }
 

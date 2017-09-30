@@ -1,22 +1,60 @@
 .tasks{
     width: 20%;
-    border: 1px dashed lightgray;
+    border-left: 1px dashed gray;
     margin:10px;
-    padding:10px;
-    background-color: white;
+    padding:0 10px 10px;
+    padding-left:30px;
     display: inline-block;
     vertical-align:top;
     text-align: left;
+    min-height: 800px;
 }
 
 .task {
     height: 9em;
-    width: 92%;
-    border: 1px solid lightgray;
-    margin:2%;
+    width: 96%;
+    border-right: 2px solid rgb(244,244,244);
+    margin:5% 2%;
     padding:2%;
     background-color: white;
     display: block;
     vertical-align:top;
     text-align: left;
+}
+
+.detail {
+    border-radius: 6px;
+    margin-top:30px;
+}
+
+.btn-group {
+    margin: 0 10px;
+    /*overwrite settings "display: block!important" in bootstrap*/
+    display: inline-block!important;
+}
+
+.status {
+    border-radius: 20px;
+    height: 25px;
+    font-size: 1em;
+}
+
+.status p {
+    margin-top: -5px;
+}
+
+
+.name {
+    height: 6em;
+    background-color: rgb(255,255,255);
+}
+
+h4 {
+    text-align: center;
+    vertical-align: center;
+    margin-top:25px;
+}
+
+#add-new {
+    color: darkgray;
 }

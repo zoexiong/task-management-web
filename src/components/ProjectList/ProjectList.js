@@ -127,7 +127,7 @@ class ProjectList extends React.Component{
                 var project = this.state.projects[this.state.detailIndex];
                 return (
                     <div>
-                        <button onClick={(e) => this.handleClickBack(e)}>Back</button>
+                        <button type="button" className="btn btn-primary btn-lg" onClick={(e) => this.handleClickBack(e)}>Back</button>
                         <ProjectDetail project={project} onChange={this.projectOnChange} />
                     </div>
                 )

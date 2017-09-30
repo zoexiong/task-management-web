@@ -17,9 +17,10 @@ class ProjectCard extends React.Component{
         } else if (this.props.addNew){
             return(
                 <div className="card" onClick={this.props.onClick}>
-                    <h4 className="card-name">+</h4>
-                    <h6 className="card-detail">Create New Project</h6>
-                    <p className="card-member"></p>
+                    <div className="card-new">
+                        <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                        <h4>Create New Project</h4>
+                    </div>
                 </div>
             )
         }

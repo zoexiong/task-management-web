@@ -24,6 +24,7 @@ class ProjectDetailCard extends React.Component{
         this.toggleAddTask = this.toggleAddTask.bind(this);
         this.changeStatus = this.changeStatus.bind(this);
         this.getStatusOptions = this.getStatusOptions.bind(this);
+        this.getStyle = this.getStyle.bind(this);
     }
 
     componentWillMount() {
@@ -98,6 +99,24 @@ class ProjectDetailCard extends React.Component{
         }, this);
     };
 
+    getStyle(status) {
+        var color = '';
+        if (status === 'Done') {
+            color = 'mediumseagreen';
+        } else if (status === 'On Hold') {
+            color = 'yellow';
+        } else if (status === 'In Process') {
+            color = 'orange';
+        } else if (status === 'Schedule') {
+            color = 'lightblue';
+        } else if (status === 'Sent') {
+            color = 'lightgray';
+        }
+        return color
+    }
+
+
+
     render() {
 
         if (this.state.member){
@@ -108,18 +127,15 @@ class ProjectDetailCard extends React.Component{
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
                         //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                        <div className="task" key={uniqueId()} >
-                            <div>{task.title}
-                                <span>
-                                    <div className="btn-group">
-                                      <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                          {task.status} <span className="caret"></span>
-                                      </button>
-                                      <ul className="dropdown-menu">
-                                          {this.getStatusOptions(i)}
-                                      </ul>
-                                    </div>
-                                </span>
+                        <div className="task detail" key={uniqueId()} style={{borderLeft: '10px solid ' + this.getStyle(task.status)}}>
+                            {task.title}
+                            <div className="btn-group">
+                              <button type="button" id={'button-' + i} className='btn dropdown-toggle status' style={{backgroundColor: this.getStyle(task.status)}} data-toggle="dropdown">
+                                  <p>{task.status} <span className="caret"></span></p>
+                              </button>
+                              <ul className="dropdown-menu">
+                                  {this.getStatusOptions(i)}
+                              </ul>
                             </div>
                             <p>{task.description}</p>
                         </div>
@@ -136,8 +152,9 @@ class ProjectDetailCard extends React.Component{
             }
             return(
                 <div className="tasks">
-                    <h4 className="card-name">{this.state.member.name}</h4>
-
+                    <div className="task name">
+                        <h4 className="card-name">{this.state.member.name}</h4>
+                    </div>
                     <Sortable
                         id={this.props.index}
                         // See all Sortable options at https://github.com/RubaXa/Sortable#options
@@ -164,8 +181,8 @@ class ProjectDetailCard extends React.Component{
         } else if (this.props.addNew) {
             return (
                 <div className="tasks">
-                    <div className="task" onClick={this.props.onClick}>
-                        <p>Add New Member</p>
+                    <div className="task name" onClick={this.props.onClick}>
+                        <h4 id="add-new">Add New Member</h4>
                     </div>
                 </div>
             )

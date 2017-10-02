@@ -3,11 +3,9 @@
 }
 
 .card {
-    height: 12em;
-    /*width: 20%;*/
-    border: 1px solid lightgray;
-    /*margin:20px 1%;*/
-    padding:0 12px;
+    height: 12.5em;
+    border: 2px solid whitesmoke;
+    padding:0 20px;
     background-color: white;
     display: inline-block;
     vertical-align:top;
@@ -17,19 +15,24 @@
 }
 
 .card-new {
-    padding-top:20%;
-    text-align: center;
-    color: lightslategray;
-
+    padding-top: 50px;
 }
 
 .card-new i {
     font-size: 2em;
 }
 
+.card-name {
+    font-weight: 600;
+    font-size: 1.4em;
+    text-align: left;
+    line-height: 1.4;
+    margin-top:20px;
+}
+
 .card-detail {
     height:5.5em;
-    margin: 20px 0 0;
+    margin: 15px 0 0;
     color: gray;
     font-family: "Helvetica", sans-serif;
     font-weight: 300;
@@ -38,7 +41,7 @@
 }
 
 .card-member {
-    ;
+    font-weight: 600;
 }
 
 @media screen and (min-width: 1960px) {
@@ -62,17 +65,17 @@
     }
 }
 
-/*@media screen and (max-width: 1280px) {*/
-    /*.card {*/
-        /*width: 27.2%;*/
-    /*}*/
-/*}*/
+@media screen and (max-width: 1280px) {
+    .card {
+        height:13.5em;
+    }
+}
 
 @media screen and (max-width: 1080px) {
     .card {
         width: 29.5%;
         margin:15px 1%;
-        height:12em;
+        height:14em;
     }
 
     .card-detail {
@@ -84,6 +87,15 @@
     .card {
         margin: 10px 3%;
         width: 42%;
+        height: 15em;
+    }
+
+    .card-detail {
+        height:7em;
+    }
+
+    .card-name {
+        font-size: 1.2em;
     }
 }
 
@@ -94,6 +106,11 @@
     }
 
     .card-detail {
-        height:4em;
+        margin-top:0;
+        height:5em;
+    }
+
+    .card-name {
+        margin: 10px 0;
     }
 }

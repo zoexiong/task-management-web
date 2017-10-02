@@ -197,9 +197,4 @@ class ProjectDetailCard extends React.Component{
     }
 }
 
-ProjectDetailCard.propTypes = {
-    items: React.PropTypes.array,
-    onChange: React.PropTypes.func
-};
-
 export default ProjectDetailCard;

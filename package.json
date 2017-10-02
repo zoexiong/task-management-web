@@ -2,6 +2,7 @@
   "name": "task-management",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://zoexiong.github.io/task-management-web",
   "dependencies": {
     "lodash": "^4.17.4",
     "react": "^15.6.2",

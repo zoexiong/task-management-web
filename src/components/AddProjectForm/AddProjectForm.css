@@ -14,9 +14,3 @@
 .Select {
     margin: 20px 0;
 }
-
-@media screen and (max-width: 800px) {
-    .modal {
-        margin-top: 100px;
-    }
-}

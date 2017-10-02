@@ -8,6 +8,10 @@ import CONSTS from '../../data/tasks';
 
 import ProjectDetailCard from '../ProjectDetailCard/ProjectDetailCard';
 
+
+import ReactDOM from 'react-dom';
+
+
 class ProjectDetail extends React.Component{
 
     constructor(props, context) {
@@ -41,7 +45,7 @@ class ProjectDetail extends React.Component{
     //exclude team members already in the project from the add new member options
     //members: array of String, contains name of team members
     filterOptions(members, options) {
-        options = options.slice();
+        var options = options.slice();
         var filteredOptions = options.filter(function(option) {
             return members.indexOf(option.value) < 0;
                 });
@@ -104,10 +108,10 @@ class ProjectDetail extends React.Component{
 
     onDnd(event) {
         this.i = this.i + 1;
-        if (this.i === 2) {
-            let from = parseInt(event.from.id, 10);
+        if (this.i == 2) {
+            let from = parseInt(event.from.id);
             let oldIndex = event.oldIndex;
-            let to = parseInt(event.to.id, 10);
+            let to = parseInt(event.to.id);
             let newIndex = event.newIndex;
             let project = _.clone(this.state.project);
             var insertTask = _.clone(project.members[from].tasks[oldIndex]);

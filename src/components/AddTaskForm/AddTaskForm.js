@@ -33,16 +33,16 @@ class AddTaskForm extends React.Component {
                                 <form className="col s12" action="/" onSubmit={this.props.onSubmit}>
                                     <div className="row">
                                         <div className="input-field">
-                                            <label htmlFor='title'>Title (max 25 characters)</label>
+                                            <label htmlFor='title'>Title (max 15 characters)</label>
                                             <br/>
-                                            <input className="form-control validate" id="title" type="text" maxLength="25" name="title" onChange={this.props.onChange}/>
+                                            <input className="form-control validate" id="title" type="text" name="title" onChange={this.props.onChange}/>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s12">
-                                            <label htmlFor='description'>Description (max 60 characters)</label>
+                                            <label htmlFor='description'>Description (max 120 characters)</label>
                                             <br/>
-                                            <textarea className="form-control validate" rows="2" id="description" type="text-area" maxLength="60" name="description" onChange={this.props.onChange}/>
+                                            <textarea className="form-control validate" rows="2" id="description" type="text-area" name="description" onChange={this.props.onChange}/>
                                         </div>
                                     </div>
                                     <Select

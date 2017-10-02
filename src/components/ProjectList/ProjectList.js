@@ -1,5 +1,5 @@
 import './ProjectList.css';
-import React from 'react';
+import React, {PropTypes} from 'react';
 import AddProjectForm from '../AddProjectForm/AddProjectForm';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import _ from 'lodash';
@@ -70,7 +70,6 @@ class ProjectList extends React.Component{
     changeForm(event) {
         const field = event.target.name;
         this.newProject[field] = event.target.value;
-
     }
 
     onSelect(val) {

@@ -50,7 +50,8 @@ class ProjectDetailCard extends React.Component{
         if (this.newTask.title && this.newTask.description && this.state.addStatus) {
             this.newTask.status = this.state.addStatus;
             var tasks = member.tasks.slice();
-            tasks = tasks.concat(this.newTask);
+            var newTask = _.clone(this.newTask);
+            tasks = tasks.concat(newTask);
             member.tasks = tasks;
 
             this.setState({
@@ -95,7 +96,7 @@ class ProjectDetailCard extends React.Component{
     getStatusOptions(taskIndex) {
         return CONSTS.STATUS.map(function(status, i){
             return(
-                <li key={i}><a href="#" onClick={(e) => {this.changeStatus(status, taskIndex)}}>{status}</a></li>
+                <li key={i}><a onClick={(e) => {this.changeStatus(status, taskIndex)}}>{status}</a></li>
             )
         }, this);
     };
@@ -105,7 +106,7 @@ class ProjectDetailCard extends React.Component{
         if (status === 'Done') {
             color = 'mediumseagreen';
         } else if (status === 'On Hold') {
-            color = 'yellow';
+            color = 'red';
         } else if (status === 'In Process') {
             color = 'orange';
         } else if (status === 'Schedule') {
@@ -132,17 +133,17 @@ class ProjectDetailCard extends React.Component{
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
                         //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
-                        <div className="task detail" key={uniqueId()} style={{borderLeft: '10px solid ' + this.getStyle(task.status)}}>
-                            {task.title}
+                        <div className="task detail" key={uniqueId()} style={{borderLeft: '8px solid ' + this.getStyle(task.status)}}>
+                            <h5 className="task-title">{task.title}</h5>
                             <div className="btn-group">
                               <button type="button" id={'button-' + i} className='btn dropdown-toggle status' style={{backgroundColor: this.getStyle(task.status)}} data-toggle="dropdown">
-                                  <p>{task.status} <span className="caret"></span></p>
+                                  <p>{task.status}  <span className="caret"></span></p>
                               </button>
                               <ul className="dropdown-menu">
                                   {this.getStatusOptions(i)}
                               </ul>
                             </div>
-                            <p>{task.description}</p>
+                            <p className="task-description">{task.description}</p>
                         </div>
                     );
                 }, this);
@@ -159,7 +160,7 @@ class ProjectDetailCard extends React.Component{
             return(
                 <div className="tasks">
                     <div className="task name">
-                        <h4 className="card-name">{this.state.member.name}</h4>
+                        <h4>{this.state.member.name}</h4>
                     </div>
                     <Sortable
                         id={this.props.index}
@@ -176,11 +177,9 @@ class ProjectDetailCard extends React.Component{
                         {tasks_list}
                     </Sortable>
 
-                    <div className="task" onClick={this.toggleAddTask}>
-                        <div className="card-new">
-                            <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                            <h4>Create New Task</h4>
-                        </div>
+                    <div className="task new-task add-new" onClick={this.toggleAddTask}>
+                        <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                        <h4>Create New Task</h4>
                     </div>
                     {add_task}
                 </div>
@@ -188,8 +187,8 @@ class ProjectDetailCard extends React.Component{
         } else if (this.props.addNew) {
             return (
                 <div className="tasks">
-                    <div className="task name" onClick={this.props.onClick}>
-                        <h4 id="add-new">Add New Member</h4>
+                    <div className="task name add-new" onClick={this.props.onClick}>
+                        <h4>Add New Member</h4>
                     </div>
                 </div>
             )

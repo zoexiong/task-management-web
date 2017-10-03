@@ -29,7 +29,6 @@ class AddTaskForm extends React.Component {
                             <h4 className="modal-title">Create Task</h4>
                         </div>
                         <div className="modal-body">
-                            /*set state to {addTask: false} to not show this modal*/
                             <div className="card-panel login-panel">
                                 <form className="col s12" action="/" onSubmit={this.props.onSubmit}>
                                     <div className="row">
@@ -46,7 +45,6 @@ class AddTaskForm extends React.Component {
                                             <textarea className="form-control validate" rows="2" id="description" type="text-area" maxLength="60" name="description" onChange={this.props.onChange}/>
                                         </div>
                                     </div>
-                                    /*use react-select to add select task status feature */
                                     <Select
                                         name="select-status"
                                         value= {this.state.status}

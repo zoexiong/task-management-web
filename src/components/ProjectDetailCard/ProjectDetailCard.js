@@ -187,7 +187,6 @@ class ProjectDetailCard extends React.Component{
                                   <p>{task.status}  <span className="caret"></span></p>
                               </button>
                               <ul className="dropdown-menu">
-                                  /*get status option elements of one task*/
                                   {this.getStatusOptions(i)}
                               </ul>
                             </div>

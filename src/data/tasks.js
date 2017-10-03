@@ -128,16 +128,20 @@ const PROJECTS = [
     // }
 ];
 
+// list of sample members
 const MEMBERS = ['Lori Lane', 'Robert Martinez', 'Jennifer Lynch', 'Emily Howard', 'Jonathan Murphy', 'Ronald McCoy', 'Daniel Carter', 'Lauren Scott', 'Thomas Pena'];
 
+//list of task status options
 const STATUS = ['Done', 'On Hold', 'In Process', 'Schedule', 'Sent'];
 
+//list of member options compatible with react-select
 const OPTIONS = MEMBERS.map(function(name) {
     return(
     {value: name, label: name}
     );
 });
 
+//list of status options compatible with react-select
 const STATUS_OPTIONS = STATUS.map(function(status) {
     return(
     {value: status, label: status}

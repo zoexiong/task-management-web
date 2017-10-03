@@ -18,17 +18,14 @@ class AddProjectForm extends React.Component {
         };
     }
 
-    componentWillMount() {
-
-    }
-
     render() {
         return(
-
+            // modal used to show the add project form
             <div className="modal">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
+                            /*set state to {addproject: false} to not show this modal*/
                             <button type="button" className="close" onClick={this.props.onClose}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -52,6 +49,7 @@ class AddProjectForm extends React.Component {
                                             <textarea className="form-control validate" rows="2" id="description" type="text-area" maxLength="100" name="description" onChange={this.props.onChange}/>
                                         </div>
                                     </div>
+                                    /*use react-select to add multi select feature */
                                     <Select
                                         name="select-members"
                                         value= {this.state.selectedMembers}

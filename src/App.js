@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
+// Import the main view contains project cards
 import ProjectList from './components/ProjectList/ProjectList';
 
 class App extends Component {

@@ -10,11 +10,16 @@ import Sortable from 'react-sortablejs';
 
 class ProjectDetailCard extends React.Component{
 
+    /**
+     * constructor, set the initial state
+     */
     constructor(props) {
         super(props);
         this.state = {
+            // member object: the data source of this component
             member: null,
             addTask: false,
+            // status of the new added task
             addStatus: null
         };
 
@@ -28,23 +33,25 @@ class ProjectDetailCard extends React.Component{
         this.onClose = this.onClose.bind(this);
     }
 
+    /**
+     * before component mount, store data come from this.props into this.state
+     * and then use data from this.state instead of from this.props for easy re-render
+     */
     componentWillMount() {
         const member = this.props.member;
-
         this.setState({
             member : member
         })
     }
 
-    toggleAddTask() {
-        this.setState({
-            addTask: !this.state.addTask
-        });
-    }
-
+    /**
+     * submit add task form and add new task to the member object, and update the project object
+     * @param {Object} event, a event object
+     */
     submitForm(event) {
         event.preventDefault();
 
+        //clone this object without referencing it to prevent possible conflicts
         var member = _.clone(this.state.member);
 
         if (this.newTask.title && this.newTask.description && this.state.addStatus) {
@@ -60,21 +67,31 @@ class ProjectDetailCard extends React.Component{
             });
 
             member.index = this.props.index;
+            //pass the updated member info to projectDetail component
             this.props.onChangeMember(member);
         }
     }
 
+    // a task object used to temporarily store data comes from the add new task form
     newTask = {
         title: '',
         description: '',
         status: null
     };
 
+    /**
+     * update newTask object based on changes sent by addTaskForm
+     * @param {Object} event, a onChange event from addTaskForm
+     */
     changeForm(event) {
         const field = event.target.name;
         this.newTask[field] = event.target.value;
     }
 
+    /**
+     * update status of new task to be added based on user selection in addTaskForm
+     * @param {String} val, a String contains the status of the new task
+     */
     onSelect(val) {
         //this.newTask.status = val;
         this.setState({
@@ -82,6 +99,11 @@ class ProjectDetailCard extends React.Component{
         });
     }
 
+    /**
+     * update status of one existing task
+     * @param {String} status, a String contains the new status of the task
+     * @param {Number} taskIndex, an integer shows the index of the task to be modified
+     */
     changeStatus(status, taskIndex){
         var member = _.clone(this.state.member);
         member.tasks[taskIndex].status = status;
@@ -93,14 +115,26 @@ class ProjectDetailCard extends React.Component{
         this.props.onChangeMember(member);
     }
 
+    /**
+     * get a list of <li> elements that compose one task's status options
+     * @param {Number} taskIndex, an integer shows the index of the task being rendered
+     * @return {Array} return Array of <li> element, which are status options of one task
+     */
     getStatusOptions(taskIndex) {
         return CONSTS.STATUS.map(function(status, i){
             return(
+                // the index of the task will be added to the <li> element's onClick function
+                // we can then update the status of the task accordingly
                 <li key={i}><a onClick={(e) => {this.changeStatus(status, taskIndex)}}>{status}</a></li>
             )
         }, this);
     };
 
+    /**
+     * return corresponding color for different task status
+     * @param {String} status, a String contains the status of the task
+     * @return {String} return a String which represents one kind of color
+     */
     getStyle(status) {
         var color = '';
         if (status === 'Done') {
@@ -117,6 +151,19 @@ class ProjectDetailCard extends React.Component{
         return color
     }
 
+
+    /**
+     * set the state of {addTask} to toggle between render the add task modal or not
+     */
+    toggleAddTask() {
+        this.setState({
+            addTask: !this.state.addTask
+        });
+    }
+
+    /**
+     * close the add task form when user click "X"
+     */
     onClose() {
         this.setState({
             addTask: false
@@ -130,9 +177,9 @@ class ProjectDetailCard extends React.Component{
             var add_task = <p></p>;
 
             if (this.state.member.tasks){
+                // render a list of task cards, each card contains one task
                 tasks_list = this.state.member.tasks.map(function(task, i) {
                     return(
-                        //<ProjectDetailCard member={member} key={i} onClick={this.handleCardClick.bind(this, i)} />
                         <div className="task detail" key={uniqueId()} style={{borderLeft: '8px solid ' + this.getStyle(task.status)}}>
                             <h5 className="task-title">{task.title}</h5>
                             <div className="btn-group">
@@ -140,6 +187,7 @@ class ProjectDetailCard extends React.Component{
                                   <p>{task.status}  <span className="caret"></span></p>
                               </button>
                               <ul className="dropdown-menu">
+                                  /*get status option elements of one task*/
                                   {this.getStatusOptions(i)}
                               </ul>
                             </div>
@@ -164,12 +212,11 @@ class ProjectDetailCard extends React.Component{
                     </div>
                     <Sortable
                         id={this.props.index}
-                        // See all Sortable options at https://github.com/RubaXa/Sortable#options
                         options={{
                             group: 'shared',
                             sort: false,
                         }}
-                        tag="div" //default is div
+                        tag="div"
                         onChange={(order, sortable, evt) => {
                             this.props.onChange(evt);
                         }}

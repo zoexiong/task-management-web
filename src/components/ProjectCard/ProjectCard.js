@@ -6,6 +6,7 @@ class ProjectCard extends React.Component{
 
     render() {
 
+        // if this card will be used to show a project, render this
         if (this.props.project){
             return(
                 <div className="card" onClick={this.props.onClick}>
@@ -15,6 +16,7 @@ class ProjectCard extends React.Component{
                 </div>
             )
         } else if (this.props.addNew){
+            // if this card will be used to show a add new project card, render this
             return(
                 <div className="card add-new card-new" data-toggle="modal" onClick={this.props.onClick}>
                     <i className="fa fa-plus-circle" aria-hidden="true"></i>

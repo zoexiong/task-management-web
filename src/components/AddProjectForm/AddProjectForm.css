@@ -1,6 +1,6 @@
 .modal {
     display: block;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 .modal-body{
@@ -15,8 +15,8 @@
     margin: 20px 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 960px) {
     .modal {
-        margin-top: 100px;
+        margin-top: 0;
     }
 }

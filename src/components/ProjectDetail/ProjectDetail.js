@@ -1,5 +1,3 @@
-import './ProjectDetail.css';
-
 import React from 'react';
 import _ from 'lodash';
 import Select from 'react-select';
